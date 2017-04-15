@@ -6,6 +6,8 @@
 
 # backup the corresponding dotfiles files in $HOME
 BACKUP=$HOME/backup_dotfiles.`date +%F`.`date +%s`
+
+echo "git update"
 git pull origin master
 echo  Creating folder: $BACKUP
 mkdir $BACKUP
