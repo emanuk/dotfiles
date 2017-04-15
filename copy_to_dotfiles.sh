@@ -14,17 +14,10 @@ echo Copy corresponding dotfiles to backup folder
 cp -r  $HOME/dotfiles $BACKUP
 echo Done!
 
-# remove compressed .vim directory in vim.tgz and create a new tar archive
-if [ -d $HOME/vim.tgz ]; then
-  rm -rf $HOME/vim.tgz
-fi
-tar czf $HOME/vim.tgz .vim
-
 # remove dotfiles files in the project dotfiles
 # copy dotfiles in $HOME to the dotfiles directory
-rm -rf $DOTFILES/.bash_aliases $DOTFILES/.screenrc $DOTFILES/.vimrc $DOTFILES/vim.tgz
-cp -r  $HOME/.bash_aliases $HOME/.screenrc $HOME/.vimrc $HOME/vim.tgz $DOTFILES
-rm -rf $HOME/vim.tgz
+rm -rf $DOTFILES/.bash_aliases $DOTFILES/.screenrc $DOTFILES/.vimrc $DOTFILES/.vim
+cp -r  $HOME/.bash_aliases $HOME/.screenrc $HOME/.vimrc $HOME/.vim $DOTFILES
 #  find .vim -name .git -print0|xargs -0 rm -rf
 #
 # git commit -a -m 'maj auto'
