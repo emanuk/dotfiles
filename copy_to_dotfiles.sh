@@ -18,7 +18,7 @@ echo Done!
 # copy dotfiles in $HOME to the dotfiles directory
 rm -rf $DOTFILES/.bash_aliases $DOTFILES/.screenrc $DOTFILES/.vimrc $DOTFILES/.vim
 cp -r  $HOME/.bash_aliases $HOME/.screenrc $HOME/.vimrc $HOME/.vim $DOTFILES
-#  find .vim -name .git -print0|xargs -0 rm -rf
+find .vim -name .git -print0|xargs -0 rm -rf
 
 echo "git commit & git push"
 
