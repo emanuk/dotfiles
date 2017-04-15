@@ -9,7 +9,7 @@ BACKUP=$HOME/backup_dotfiles.`date +%F`.`date +%s`
 echo  Creating folder: $BACKUP
 mkdir $BACKUP
 echo Copy corresponding dotfiles to backup folder
-cp -r  $HOME/.bash_aliases $HOME/.screenrc $HOME/.vimrc $HOME/.vimtmp $HOME/.vim $BACKUP
+cp -r  $HOME/.bash_aliases $HOME/.screenrc $HOME/.vimrc $HOME/.vim $BACKUP
 echo Done!
 
 # check if .vimtmp exist

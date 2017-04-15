@@ -19,6 +19,6 @@ echo Done!
 rm -rf $DOTFILES/.bash_aliases $DOTFILES/.screenrc $DOTFILES/.vimrc $DOTFILES/.vim
 cp -r  $HOME/.bash_aliases $HOME/.screenrc $HOME/.vimrc $HOME/.vim $DOTFILES
 #  find .vim -name .git -print0|xargs -0 rm -rf
-#
+
 # git commit -a -m 'maj auto'
 # git push origin master
