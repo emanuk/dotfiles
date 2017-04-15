@@ -20,5 +20,5 @@ rm -rf $DOTFILES/.bash_aliases $DOTFILES/.screenrc $DOTFILES/.vimrc $DOTFILES/.v
 cp -r  $HOME/.bash_aliases $HOME/.screenrc $HOME/.vimrc $HOME/.vim $DOTFILES
 #  find .vim -name .git -print0|xargs -0 rm -rf
 
-# git commit -a -m 'maj auto'
-# git push origin master
+git commit -a -m 'maj copy_to_dotfiles'
+git push origin master

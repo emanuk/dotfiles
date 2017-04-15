@@ -6,6 +6,7 @@
 
 # backup the corresponding dotfiles files in $HOME
 BACKUP=$HOME/backup_dotfiles.`date +%F`.`date +%s`
+git pull origin master
 echo  Creating folder: $BACKUP
 mkdir $BACKUP
 echo Copy corresponding dotfiles to backup folder
