@@ -17,9 +17,9 @@ echo Done!
 
 # check if .vimtmp exist
 if [ ! -d $HOME/.vimtmp ]; then
-  mkdir -p .vimtmp/_backup
-  mkdir -p .vimtmp/_swap
-  mkdir -p .vimtmp/_undo
+  mkdir -p $HOME/.vimtmp/_backup
+  mkdir -p $HOME/.vimtmp/_swap
+  mkdir -p $HOME/.vimtmp/_undo
 fi
 
 rm -rf  $HOME/.bash_aliases $HOME/.screenrc $HOME/.vimrc $HOME/.vim
