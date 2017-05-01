@@ -79,7 +79,9 @@ set term=screen-256color
 
 " set background=dark
 " colorscheme solarized
-colorscheme molokai
+" colorscheme molokai
+colorscheme badwolf
+" colorscheme goodwolf
 "colorscheme toothpaste
 " colorscheme mustang
 " colorscheme vitamins
@@ -114,9 +116,6 @@ set backupdir=~/.vimtmp/_backup//,/tmp//
 "pathogen
 execute pathogen#infect()
 
-"NERDTree
-let NERDTreeShowBookmarks=1
-" nnoremap <leader>n :NERDTreeToggle<cr>
 
 " syntastic
 set statusline+=%#warningmsg#
@@ -229,10 +228,8 @@ nnoremap <leader>a :!Antidote9 -f %<CR>
 "
 " buffer next
 map <C-J> :bnext<CR>
-nnoremap <leader>. :bnext<cr>
 " buffer prev
 map <C-K> :bprev<CR>
-nnoremap <leader>.. :bprev <cr>
 " goto buffer
 nnoremap gb :ls<CR>:b<Space>
 
@@ -244,7 +241,7 @@ nnoremap <leader>t :TagbarToggle<CR>
 "
 "ContrlP voir h:CONTROLEP
 "
-nnoremap <leader>b :CtrlPBuffer<CR>
+nnoremap <leader>j :CtrlPBuffer<CR>
 nnoremap <leader>m :CtrlPMRU<CR>
 let g:ctrlp_working_path_mode = 'wc'
 
@@ -261,8 +258,12 @@ imap jj <Esc>
 "
 " NERDTree
 "
-nnoremap <leader>f :NERDTreeFind<cr>
-nnoremap <leader>n :NERDTreeToggle<cr>
+" nnoremap <leader>f :NERDTreeFind<cr>
+" nnoremap <leader>n :NERDTreeToggle<cr>
+" let NERDTreeShowBookmarks=1
+" nnoremap <leader>n :NERDTreeToggle<cr>
+" http://vimcasts.org/blog/2013/01/oil-and-vinegar-split-windows-and-project-drawer/
+" let NERDTreeHijackNetrw=1
 
 "
 " Relative number
@@ -297,26 +298,10 @@ endfunction
 
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <leader>, <C-x><C-o>
-" inoremap <expr> <tab> pumvisible() ? "\<C-n>" : "\<tab>"
-
-" inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
-" inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
-
-
-" function! CleverTab()
-"   if pumvisible()
-"     return "\<C-N>"
-"   endif
-"   if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
-"     return "\<Tab>"
-"   elseif exists('&omnifunc') && &omnifunc != ''
-"     return "\<C-X>\<C-O>"
-"   else
-"     return "\<C-N>"
-"   endif
-" endfunction
-" inoremap <tab> <C-R>=CleverTab()<CR>
 
 " clipboard / paste
 set pastetoggle=<leader>p
+
+" Open snippets
+nnoremap <leader>sni :e $HOME/.vim/bundle/snipmate.vim/snippets/_.snippets<cr>
 
