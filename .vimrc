@@ -79,8 +79,8 @@ set term=screen-256color
 
 " set background=dark
 " colorscheme solarized
-" colorscheme molokai
-colorscheme badwolf
+colorscheme molokai
+" colorscheme badwolf
 " colorscheme goodwolf
 "colorscheme toothpaste
 " colorscheme mustang
