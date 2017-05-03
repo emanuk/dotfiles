@@ -166,18 +166,21 @@ let g:tagbar_autoclose = 1
 let g:tagbar_autofocus = 1
 
 " simplenote.vim
-source ~/.simplenoterc
-let g:SimplenoteVertical=1
-" let g:SimplenoteStrftime="%Y-%m-%d %T"
-let g:SimplenoteStrftime="%Y-%m-%d"
-let g:SimplenoteFiletype="markdown"
-" let g:SimplenoteListSize=30
-" let g:SimplenoteSortOrder="pinned,title"
-nnoremap <leader>snl :SimplenoteList<CR>
-nnoremap <leader>snt :SimplenoteTag<CR>
-nnoremap <leader>snn :SimplenoteNew<CR>
-nnoremap <leader>snp :SimplenotePin<CR>
-nnoremap <leader>snu :SimplenoteUnpin<CR>
+if !empty(glob("$HOME/.simplenoterc"))
+  source ~/.simplenoterc
+  let g:SimplenoteVertical=1
+  " let g:SimplenoteStrftime="%Y-%m-%d %T"
+  let g:SimplenoteStrftime="%Y-%m-%d"
+  let g:SimplenoteFiletype="markdown"
+  " let g:SimplenoteListSize=30
+  " let g:SimplenoteSortOrder="pinned,title"
+  nnoremap <leader>snl :SimplenoteList<CR>
+  nnoremap <leader>snt :SimplenoteTag<CR>
+  nnoremap <leader>snn :SimplenoteNew<CR>
+  nnoremap <leader>snp :SimplenotePin<CR>
+  nnoremap <leader>snu :SimplenoteUnpin<CR>
+endif
+
 
 
 """"""""""""""
