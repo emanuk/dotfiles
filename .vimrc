@@ -1,4 +1,4 @@
-""""""""""""""""""""""""
+"""""""""""""""""""""""
 """ VIM COMPORTEMENT """
 """"""""""""""""""""""""
 set autoindent
@@ -10,6 +10,8 @@ set showmatch
 set term=builtin_ansi
 " ne demande plus de charger le fichier modifié par une autre application
 set autoread
+"clipboard ajoute automatiquement au presse-papier système
+" clipboard+=unnamed
 
 set syntax
 syntax on
@@ -132,8 +134,6 @@ let g:syntastic_php_checkers = ['php']
 let g:syntastic_enable_perl_checker = 1
 let g:syntastic_perl_checkers = ['perl', 'podchecker']
 
-
-
 " ack
 " set grepprg=ack-grep\ -k
 
@@ -181,10 +181,12 @@ if !empty(glob("$HOME/.simplenoterc"))
   nnoremap <leader>snu :SimplenoteUnpin<CR>
 endif
 
-
+" vim-vinegar (netwr)
+let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 
 """"""""""""""
 """ CODING """
+""""""""""""""
 
 " check perl code with :make
 
@@ -308,3 +310,5 @@ set pastetoggle=<leader>p
 " Open snippets
 nnoremap <leader>sni :e $HOME/.vim/bundle/snipmate.vim/snippets/_.snippets<cr>
 
+" Current file path
+nnoremap <leader>pa :echo expand('%:p')<cr>

@@ -1,10 +1,3 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =8
-let g:netrw_dirhist_1='/home/emm'
-let g:netrw_dirhist_2='/home/emm/.vim'
-let g:netrw_dirhist_3='/home/emm/.vim/bundle'
-let g:netrw_dirhist_4='/home/emm/.vim/bundle/snipmate.vim'
-let g:netrw_dirhist_5='/home/emm/.vim/bundle/snipmate.vim/snippets'
-let g:netrw_dirhist_6='/home/emm'
-let g:netrw_dirhist_7='/home/emm/Téléchargements'
-let g:netrw_dirhist_8='/usr/share/X11/xkb/types'
+let g:netrw_dirhist_cnt =1
+let g:netrw_dirhist_1='/home/emm/bin'
