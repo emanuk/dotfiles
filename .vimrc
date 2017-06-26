@@ -207,7 +207,7 @@ nnoremap <leader>r :!php %<cr>
 autocmd FileType php setlocal commentstring=#\ %s
 
 " autocompletion
-" set omnifunc=syntaxcomplete#Complete
+set omnifunc=syntaxcomplete#Complete
 filetype plugin on
 set completeopt=longest,menuone
 " inoremap <leader>, <C-x><C-o>
@@ -219,6 +219,9 @@ autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 " Check js code with  nodelint
 " set makeprg=NODE_DISABLE_COLORS=1\ nodelint\ %
 " set errorformat=%A%f\,\ line\ %l\,\ character\ %c:%m,%Z%.%#,%-G%.%#
+
+" EmberJS template .hbs 
+autocmd FileType hbs set omnifunc=htmlcomplete#CompleteTags
 
 """"""""""""""""""""""""""""
 """ KEY MAP -  SHORTCUTS """
