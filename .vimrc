@@ -78,6 +78,7 @@ set shortmess=I
 " theme
 set t_Co=256
 set term=screen-256color
+highlight Pmenu ctermfg=White ctermbg=DarkBlue cterm=None guifg=Cyan guibg=DarkBlue
 
 " set background=dark
 " colorscheme solarized
@@ -139,8 +140,13 @@ let g:syntastic_perl_checkers = ['perl', 'podchecker']
 
 " lightline
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'seoul256',
       \ }
+
+" let g:lightline = {
+"       \ 'colorscheme': 'wombat',
+"       \ }
+"
 "
 "investigate
 let g:investigate_url_for_php="https://duckduckgo.com/?q=!php ^s"
@@ -183,6 +189,21 @@ endif
 
 " vim-vinegar (netwr)
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+
+" Ultisnips
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsJumpForwardTrigger="<c-b>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+let g:UltiSnipsEditSplit='context'
+let g:UltiSnipsSnippetsDir='~/.vim/snippets_ulti'
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "snippets_ulti"]
+let g:UltiSnipsExpandTrigger = '<f5>'
+
+" neocomplete
+let g:neocomplete#enable_at_startup = 1
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 """"""""""""""
 """ CODING """
@@ -235,9 +256,9 @@ nnoremap <leader>a :!Antidote9 -f %<CR>
 " Buffer navigation
 "
 " buffer next
-map <C-J> :bnext<CR>
+" map <C-J> :bnext<CR>
 " buffer prev
-map <C-K> :bprev<CR>
+" map <C-K> :bprev<CR>
 " goto buffer
 nnoremap gb :ls<CR>:b<Space>
 
@@ -286,7 +307,8 @@ nnoremap <leader>w <C-w>v<C-w>l
 "
 " vimrc
 "
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+" nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>ev :split $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
 "
@@ -304,7 +326,7 @@ function! InsertTabWrapper()
     endif
 endfunction
 
-inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+" inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <leader>, <C-x><C-o>
 
 " clipboard / paste
