@@ -138,17 +138,47 @@ let g:syntastic_perl_checkers = ['perl', 'podchecker']
 " ack
 " set grepprg=ack-grep\ -k
 
-" lightline
+"lightline
+" let g:lightline = {
+"       \ 'colorscheme': 'seoul256',
+"       \ }
 let g:lightline = {
       \ 'colorscheme': 'seoul256',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'gitbranch#name'
+      \ },
       \ }
+
+" let g:lightline = {
+"       \ 'active': {
+"       \   'left': [ [ 'mode', 'paste' ],
+"       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+"       \ },
+"       \ 'component_function': {
+"       \   'gitbranch': 'gitbranch#name'
+"       \ },
+"       \ }
 
 " let g:lightline = {
 "       \ 'colorscheme': 'wombat',
 "       \ }
-"
-"
-"investigate
+
+" let g:lightline = {
+"       \ 'component_function': {
+"       \   'filename': 'LightLineFilename'
+"       \ }
+"       \ }
+" function! LightLineFilename()
+"   return expand('%:p')
+" endfunction
+
+
+
+""investigate
 let g:investigate_url_for_php="https://duckduckgo.com/?q=!php ^s"
 
 
@@ -191,14 +221,15 @@ endif
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 
 " Ultisnips
-" let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsExpandTrigger="<leader>,"
 " let g:UltiSnipsJumpForwardTrigger="<c-b>"
 " let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 let g:UltiSnipsEditSplit='context'
 let g:UltiSnipsSnippetsDir='~/.vim/snippets_ulti'
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "snippets_ulti"]
-let g:UltiSnipsExpandTrigger = '<f5>'
+nnoremap <leader>sniphp :e ~/.vim/bundle/vim-snippets/snippets/php.snippets<CR>
+nnoremap <leader>es :UltiSnipsEdit<cr>
 
 " neocomplete
 let g:neocomplete#enable_at_startup = 1
@@ -327,13 +358,13 @@ function! InsertTabWrapper()
 endfunction
 
 " inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-inoremap <leader>, <C-x><C-o>
+" inoremap <leader>, <C-x><C-o>
 
 " clipboard / paste
 set pastetoggle=<leader>p
 
-" Open snippets
-nnoremap <leader>sni :e $HOME/.vim/bundle/snipmate.vim/snippets/_.snippets<cr>
-
 " Current file path
 nnoremap <leader>pa :echo expand('%:p')<cr>
+
+" map shortcuts
+nnoremap <leader>lea :Ack 'leader>' ~/.vimrc<cr>

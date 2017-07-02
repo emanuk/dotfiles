@@ -24,3 +24,4 @@ echo "git commit & git push"
 
 git commit -a -m 'maj copy_to_dotfiles'
 git push origin master
+
