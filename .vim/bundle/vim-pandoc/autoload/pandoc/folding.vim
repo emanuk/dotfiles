@@ -38,6 +38,10 @@ function! pandoc#folding#Init()
     if !exists("g:pandoc#folding#fold_fenced_codeblocks")
         let g:pandoc#folding#fold_fenced_codeblocks = 0
     endif
+    " Use custom foldtext? {{{3
+    if !exists('g:pandoc#folding#use_foldtext')
+        let g:pandoc#folding#use_foldtext = 1
+    endif
     " Use basic folding fot this buffer? {{{3
     if !exists("b:pandoc_folding_basic")
         let b:pandoc_folding_basic = 0
@@ -53,7 +57,9 @@ function! pandoc#folding#Init()
         autocmd InsertLeave <buffer> setlocal foldmethod=expr
     augroup end
     setlocal foldexpr=pandoc#folding#FoldExpr()
-    setlocal foldtext=pandoc#folding#FoldText()
+    if g:pandoc#folding#use_foldtext
+        setlocal foldtext=pandoc#folding#FoldText()
+    endif
     if g:pandoc#folding#fdc > 0
         let &l:foldcolumn = g:pandoc#folding#fdc
     endif
@@ -133,7 +139,7 @@ function! pandoc#folding#FoldExpr()
     if g:pandoc#folding#fold_vim_markers == 1
         if vline =~ '[{}]\{3}'
             if g:pandoc#folding#vim_markers_in_comments_only == 1
-                let mark_head = '<!--\s*'
+                let mark_head = '<!--.*'
             else
                 let mark_head = ''
             endif
@@ -157,7 +163,7 @@ function! pandoc#folding#FoldExpr()
     endif
 
     " Delegate to filetype specific functions
-    if &ft =~ "markdown" || &ft == "pandoc"
+    if &ft =~ "markdown" || &ft == "pandoc" || &ft == "rmd"
         " vim-pandoc-syntax sets this variable, so we can check if we can use
         " syntax assistance in our foldexpr function
         if exists("g:vim_pandoc_syntax_exists") && b:pandoc_folding_basic != 1
@@ -183,15 +189,18 @@ function! pandoc#folding#FoldText()
     let line_count_text = " / " . line_count . " lines / "
 
     if n_line =~ 'title\s*:'
-        return v:folddashes . " [yaml] " . matchstr(n_line, '\(title\s*:\s*\)\@<=\S.*') . line_count_text
+        return v:folddashes . " [y] " . matchstr(n_line, '\(title\s*:\s*\)\@<=\S.*') . line_count_text
     endif
     if f_line =~ "fold-begin"
-        return v:folddashes . " [custom] " . matchstr(f_line, '\(<!-- \)\@<=.*\( fold-begin -->\)\@=') . line_count_text
+        return v:folddashes . " [c] " . matchstr(f_line, '\(<!-- \)\@<=.*\( fold-begin -->\)\@=') . line_count_text
+    endif
+    if f_line =~ "<!-- .*{{{"
+        return v:folddashes . " [m] " . matchstr(f_line, '\(<!-- \)\@<=.*\( {{{.* -->\)\@=') . line_count_text
     endif
     if f_line =~ "<div class="
         return v:folddashes . " [". matchstr(f_line, "\\(class=[\"']\\)\\@<=.*[\"']\\@="). "] " . n_line[:30] . "..." . line_count_text
     endif
-    if &ft =~ "markdown" || &ft == "pandoc"
+    if &ft =~ "markdown" || &ft == "pandoc" || &ft == "rmd"
         return pandoc#folding#MarkdownFoldText() . line_count_text
     elseif &ft == "textile"
         return pandoc#folding#TextileFoldText() . line_count_text

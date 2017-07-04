@@ -230,6 +230,8 @@ function! phpcomplete#CompletePHP(findstart, base) " {{{
 	end
 
 	try
+		let eventignore = &eventignore
+		let &eventignore = 'all'
 		let winheight = winheight(0)
 		let winnr = winnr()
 
@@ -300,6 +302,7 @@ function! phpcomplete#CompletePHP(findstart, base) " {{{
 		endif
 	finally
 		silent! exec winnr.'resize '.winheight
+		let &eventignore = eventignore
 	endtry
 endfunction
 " }}}
@@ -1055,10 +1058,10 @@ function! phpcomplete#GetCurrentSymbolWithContext() " {{{
 	let start = col('.') - 1
 	let end = start
 	if start < 0
-		let start = 0;
+		let start = 0
 	endif
 	if end < 0
-		let end = 0;
+		let end = 0
 	endif
 
 	while start >= 0 && line[start - 1] =~ '[\\a-zA-Z_0-9\x7f-\xff$]'
@@ -2769,7 +2772,7 @@ function! phpcomplete#FormatDocBlock(info) " {{{
 	endif
 
 	return res
-endfunction!
+endfunction
 " }}}
 
 function! phpcomplete#GetCurrentNameSpace(file_lines) " {{{

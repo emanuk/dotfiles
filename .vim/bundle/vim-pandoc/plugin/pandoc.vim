@@ -32,11 +32,13 @@ let g:pandoc_extensions_table = {
 " Enabled modules {{{3
 if !exists("g:pandoc#modules#enabled")
     let g:pandoc#modules#enabled = [
+                \"yaml",
                 \"bibliographies",
                 \"completion",
                 \"command",
                 \"folding",
                 \"formatting",
+                \"indent",
                 \"menu",
                 \"metadata",
                 \"keyboard" ,
@@ -50,6 +52,9 @@ endif
 if !exists("g:pandoc#modules#disabled")
     let g:pandoc#modules#disabled = []
 endif
+if !exists('g:pandoc#modules#warn_disabled')
+    let g:pandoc#modules#warn_disabled = 1
+endif
 if v:version < 704
     let s:module_disabled = 0
     for incompatible_module in ["bibliographies", "command"]
@@ -61,7 +66,7 @@ if v:version < 704
     endfor
     " only message the user if we have extended g:pandoc#modules#disabled
     " automatically
-    if s:module_disabled == 1
+    if s:module_disabled == 1 && g:pandoc#modules#warn_disabled
         echomsg "vim-pandoc: 'bibliographies' and 'command' modules require vim >= 7.4 and have been disabled."
     endif
 endif

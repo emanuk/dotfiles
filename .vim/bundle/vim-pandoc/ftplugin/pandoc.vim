@@ -23,4 +23,14 @@ for module in s:enabled_modules
     exe 'call pandoc#' . module . '#Init()'
 endfor
 
+if exists("loaded_matchit")
+    setlocal matchpairs-=<:>
+    let b:match_words = &l:matchpairs .
+      \ ',' . '\%(^\|[ (]\)\@<=\$\$\?' . ':' . '\$\?\$\%($\|[ ).\,;\:?!\-]\)' .
+      \ ',' . '\%(^\s*\)\@<=\\begin{\w\+\*\?}' . ':' . '\%(^\s*\)\@<=\\end{\w\+\*\?}'
+endif
+
+setlocal formatlistpat=\\C^\\s*[\\[({]\\\?\\([0-9]\\+\\\|[iIvVxXlLcCdDmM]\\+\\\|[a-zA-Z]\\)[\\]:.)}]\\s\\+\\\|^\\s*[-+o*]\\s\\+
+setlocal formatoptions+=n
+
 let b:pandoc_loaded = 1

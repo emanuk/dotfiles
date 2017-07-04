@@ -25,7 +25,7 @@ function! markdown#headers#NextHeader(...) "{{{1
         let search_from = getpos(".")
     endif
     call cursor(search_from[1], 2)
-    let h_lnum = search('\(^.*\n[-=]\|^#\)','nW')
+    let h_lnum = search('\(^.*\n[-=]\{2\}\|^#\)','nW')
     if h_lnum != 0 && markdown#headers#CheckValidHeader(h_lnum) != 1
         let h_lnum = markdown#headers#NextHeader(h_lnum)
     endif
@@ -46,7 +46,7 @@ function! markdown#headers#PrevHeader(...) "{{{1
         let search_from = origin_pos
     endif
     call cursor(search_from[1], 1)
-    let h_lnum = search('\(^.*\n[-=]\|^#\)', 'bnW')
+    let h_lnum = search('\(^.*\n[-=]\{2\}\|^#\)', 'bnW')
     if h_lnum != 0 && markdown#headers#CheckValidHeader(h_lnum) != 1
         let h_lnum = markdown#headers#PrevHeader(h_lnum)
         " we might go back into the YAML frontmatter, we must recheck if we
@@ -384,7 +384,7 @@ function! markdown#headers#GetAutomaticID(header) " {{{1
     if !exists("header_id") || header_id == ""
         let text = substitute(a:header, '\[\(.\{-}\)\]\[.*\]', '\1', '') " remove links
         let text = substitute(text, '\s{.*}', '', '') " remove attributes
-        let text = substitute(text, '[[:punct:]]', '', 'g') " remove formatting and punctuation
+        let text = substitute(text, '[!"#\$%\&''()\*+,/:;<=>?@\[\\\]\^`{|}\~]', '', 'g') " remove formatting and punctuation, except -_. (hyphen, underscore, period)
         let text = substitute(text, '.\{-}[[:alpha:]\u20AC-\uFFFF]\@=', '', '') " remove everything before the first letter
         let text = substitute(text, '\s', '-', 'g') " replace spaces with dashes
         let text = tolower(text) " turn lowercase
