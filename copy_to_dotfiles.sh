@@ -14,10 +14,14 @@ echo Copy corresponding dotfiles to backup folder
 cp -r  $HOME/dotfiles $BACKUP
 echo Done!
 
+# todo update all projects in the .vim folder
+
+
 # remove dotfiles files in the project dotfiles
 # copy dotfiles in $HOME to the dotfiles directory
 rm -rf $DOTFILES/.bash_aliases $DOTFILES/.screenrc $DOTFILES/.vimrc $DOTFILES/.vim
 cp -r  $HOME/.bash_aliases $HOME/.screenrc $HOME/.vimrc $HOME/.vim $DOTFILES
+# don't need here the git projects
 find .vim -name .git -print0|xargs -0 rm -rf
 
 echo "git add, commit & git push"

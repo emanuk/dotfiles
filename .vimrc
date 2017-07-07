@@ -134,6 +134,9 @@ let g:syntastic_php_checkers = ['php']
 " let g:syntastic_php_phpcs_args = "--standard=Drupal -n --report=csv"
 let g:syntastic_enable_perl_checker = 1
 let g:syntastic_perl_checkers = ['perl', 'podchecker']
+" let syntastic_mode_map = { 'passive_filetypes': ['html'] }
+nnoremap <leader>syc :SyntasticCheck<cr>
+nnoremap <leader>syr :SyntasticReset<cr>
 
 " ack
 " set grepprg=ack-grep\ -k
@@ -228,13 +231,16 @@ let g:UltiSnipsExpandTrigger="<leader>,"
 let g:UltiSnipsEditSplit='context'
 let g:UltiSnipsSnippetsDir='~/.vim/snippets_ulti'
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "snippets_ulti"]
-nnoremap <leader>sniphp :e ~/.vim/bundle/vim-snippets/snippets/php.snippets<CR>
+nnoremap <leader>snp :e ~/.vim/bundle/vim-snippets/snippets/php.snippets<CR>
 nnoremap <leader>es :UltiSnipsEdit<cr>
 
 " neocomplete
 let g:neocomplete#enable_at_startup = 1
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" mustache-handlebars
+let g:mustache_abbreviations = 1
 
 """"""""""""""
 """ CODING """
