@@ -6,6 +6,7 @@ set bs=2
 set wrapmargin=7
 set wrapscan
 set number
+set relativenumber
 set showmatch
 set term=builtin_ansi
 " ne demande plus de charger le fichier modifié par une autre application
@@ -134,7 +135,7 @@ let g:syntastic_php_checkers = ['php']
 " let g:syntastic_php_phpcs_args = "--standard=Drupal -n --report=csv"
 let g:syntastic_enable_perl_checker = 1
 let g:syntastic_perl_checkers = ['perl', 'podchecker']
-" let syntastic_mode_map = { 'passive_filetypes': ['html'] }
+let syntastic_mode_map = { 'passive_filetypes': ['html'] }
 nnoremap <leader>syc :SyntasticCheck<cr>
 nnoremap <leader>syr :SyntasticReset<cr>
 
@@ -222,6 +223,7 @@ endif
 
 " vim-vinegar (netwr)
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+let g:netrw_liststyle=3
 
 " Ultisnips
 let g:UltiSnipsExpandTrigger="<leader>,"
@@ -239,8 +241,11 @@ let g:neocomplete#enable_at_startup = 1
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
-" mustache-handlebars
+" mustache-handlebars / Ember
 let g:mustache_abbreviations = 1
+
+" vim-fugitive
+set diffopt+=vertical
 
 """"""""""""""
 """ CODING """
@@ -305,11 +310,12 @@ nnoremap gb :ls<CR>:b<Space>
 nnoremap <leader>t :TagbarToggle<CR>
 
 "
-"ContrlP voir h:CONTROLEP
+"ContrlP voir h:CONTROLP
 "
 nnoremap <leader>j :CtrlPBuffer<CR>
 nnoremap <leader>m :CtrlPMRU<CR>
-let g:ctrlp_working_path_mode = 'wc'
+let g:ctrlp_working_path_mode = 'ra'
+" let g:ctrlp_custom_ignore = 
 
 "
 " selection |ctags|
@@ -341,6 +347,9 @@ nnoremap <leader>nn :set relativenumber!<cr>
 "
 nnoremap <leader>w <C-w>v<C-w>l
 
+" Horizontal split window
+"
+nnoremap <leader>ws <C-w>s<C-w>j
 "
 " vimrc
 "
@@ -372,5 +381,18 @@ set pastetoggle=<leader>p
 " Current file path
 nnoremap <leader>pa :echo expand('%:p')<cr>
 
+" cd to file path
+nnoremap <leader>cd :lcd %:p:h<cr>
 " map shortcuts
+
 nnoremap <leader>lea :Ack 'leader>' ~/.vimrc<cr>
+
+" nnoremap <leader>mm :g:mustache_abbreviations = 1<cr>
+
+" window split
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+set nogdefault
