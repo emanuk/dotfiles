@@ -314,7 +314,8 @@ nnoremap <leader>t :TagbarToggle<CR>
 "
 nnoremap <leader>j :CtrlPBuffer<CR>
 nnoremap <leader>m :CtrlPMRU<CR>
-let g:ctrlp_working_path_mode = 'ra'
+" let g:ctrlp_working_path_mode = 'ra'
+" let g:ctrlp_working_path_mode = ''
 " let g:ctrlp_custom_ignore = 
 
 "
@@ -394,5 +395,13 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
+" window resize
+" map <c-m> <c-w><
+" map <c-n> <c-w>>
+nnoremap <leader>vr :vertical resize +20<cr>
+
+" fzf
+set rtp+=~/.fzf
 
 set nogdefault
