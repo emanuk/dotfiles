@@ -404,4 +404,7 @@ nnoremap <leader>vr :vertical resize +20<cr>
 " fzf
 set rtp+=~/.fzf
 
+"ag the silver searcher
+let g:ackprg = 'ag --nogroup --nocolor --column'
+
 set nogdefault
