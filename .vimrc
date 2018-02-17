@@ -83,10 +83,10 @@ highlight Pmenu ctermfg=White ctermbg=DarkBlue cterm=None guifg=Cyan guibg=DarkB
 
 " set background=dark
 " colorscheme solarized
-colorscheme molokai
-" colorscheme badwolf
+" colorscheme molokai
+colorscheme badwolf
 " colorscheme goodwolf
-"colorscheme toothpaste
+" colorscheme toothpaste
 " colorscheme mustang
 " colorscheme vitamins
 
