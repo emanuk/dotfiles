@@ -81,14 +81,19 @@ set t_Co=256
 set term=screen-256color
 highlight Pmenu ctermfg=White ctermbg=DarkBlue cterm=None guifg=Cyan guibg=DarkBlue
 
-" set background=dark
-" colorscheme solarized
-colorscheme molokai
+syntax enable
+set background=dark
+" set background=light
+" let g:solarized_termcolors=256
+colorscheme solarized
+" colorscheme molokai
 " colorscheme badwolf
 " colorscheme goodwolf
 " colorscheme toothpaste
 " colorscheme mustang
 " colorscheme vitamins
+" colors zenburn
+
 
 " autosave when focus is lost
 au FocusLost * :wa

@@ -1,9 +1,3 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/var/www/lautreparole/docs'
-let g:netrw_dirhist_2='/var/www/lautreparole'
-let g:netrw_dirhist_3='/var/www'
-let g:netrw_dirhist_4='/var'
-let g:netrw_dirhist_5='/'
-let g:netrw_dirhist_6='/home'
-let g:netrw_dirhist_7='/home/emm'
+let g:netrw_dirhist_cnt =1
+let g:netrw_dirhist_1='/home/emm/.vim'
