@@ -189,6 +189,7 @@ let g:lightline = {
 
 ""investigate
 let g:investigate_url_for_php="https://duckduckgo.com/?q=!php ^s"
+" shortcut: gK
 
 
 " gundo
@@ -408,6 +409,7 @@ nnoremap <leader>vr :vertical resize +20<cr>
 
 " fzf
 set rtp+=~/.fzf
+nnoremap <leader>f :Files<cr>
 
 "ag the silver searcher
 let g:ackprg = 'ag --nogroup --nocolor --column'
