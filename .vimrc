@@ -208,13 +208,14 @@ let g:pandoc#modules#disabled = ["spell"]
 let g:vim_markdown_folding_disabled = 1
 
 " Tagbar
-let g:tagbar_autoclose = 1
+let g:tagbar_autoclose = 0
 let g:tagbar_autofocus = 1
 
 " simplenote.vim
 if !empty(glob("$HOME/.simplenoterc"))
   source ~/.simplenoterc
   let g:SimplenoteVertical=1
+  " g:SimplenoteSingleWindow
   " let g:SimplenoteStrftime="%Y-%m-%d %T"
   let g:SimplenoteStrftime="%Y-%m-%d"
   let g:SimplenoteFiletype="markdown"
@@ -224,7 +225,8 @@ if !empty(glob("$HOME/.simplenoterc"))
   nnoremap <leader>snt :SimplenoteTag<CR>
   nnoremap <leader>snn :SimplenoteNew<CR>
   nnoremap <leader>snp :SimplenotePin<CR>
-  nnoremap <leader>snu :SimplenoteUnpin<CR>
+  nnoremap <leader>snP :SimplenoteUnpin<CR>
+  " nnoremap <leader>snu :SimplenoteUpdate<CR>
 endif
 
 " vim-vinegar (netwr)
