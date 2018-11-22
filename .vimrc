@@ -137,7 +137,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_php_checkers = ['php']
 " let g:syntastic_php_checkers = ['php', 'phpcs']
-" let g:syntastic_php_phpcs_args = "--standard=Drupal -n --report=csv"
+let g:syntastic_php_phpcs_args = "--standard=Drupal -n --report=csv"
 let g:syntastic_enable_perl_checker = 1
 let g:syntastic_perl_checkers = ['perl', 'podchecker']
 let syntastic_mode_map = { 'passive_filetypes': ['html'] }
@@ -293,6 +293,20 @@ autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 
 " EmberJS template .hbs 
 autocmd FileType hbs set omnifunc=htmlcomplete#CompleteTags
+
+" Drupal
+if has("autocmd")
+  " Drupal *.module and *.install files.
+  augroup module
+    autocmd BufRead,BufNewFile *.module set filetype=php
+    autocmd BufRead,BufNewFile *.install set filetype=php
+    autocmd BufRead,BufNewFile *.test set filetype=php
+    autocmd BufRead,BufNewFile *.inc set filetype=php
+    autocmd BufRead,BufNewFile *.profile set filetype=php
+    autocmd BufRead,BufNewFile *.view set filetype=php
+  augroup END
+endif
+syntax on
 
 """"""""""""""""""""""""""""
 """ KEY MAP -  SHORTCUTS """
