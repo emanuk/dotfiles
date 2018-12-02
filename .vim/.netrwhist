@@ -1,5 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
-let g:netrw_dirhist_1='/home/emmanuel/Nextcloud/Documents/recitpresco/custom'
-let g:netrw_dirhist_2='/home/emmanuel/Nextcloud/Documents/recitpresco/custom/recitpresco_custom'
-let g:netrw_dirhist_3='/home/emmanuel/Nextcloud/Documents/recitpresco/recit'
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/'
+let g:netrw_dirhist_2='/tmp/Temp-11220a0d-6888-48ed-8f67-215bc8e79957'
+let g:netrw_dirhist_3='/'
+let g:netrw_dirhist_4='/tmp'
+let g:netrw_dirhist_5='/'
+let g:netrw_dirhist_6='/home/emm'

@@ -16,7 +16,7 @@ export LESS="-eirMX"
 #setterm -blength 0
 set -o vi
 # export PATH="$HOME/bin:$HOME/bin/navicat:$HOME/.config/composer/vendor/bin:$HOME/local/bin:$PATH"
-export PATH="$HOME/bin:$HOME/bin/navicat:$HOME/.config/composer/vendor/bin:$PATH"
+# export PATH="$HOME/bin:$HOME/bin/navicat:$HOME/.config/composer/vendor/bin:/usr/bin:/usr/sbin:$PATH"
 # export TERM="xterm-256color"
 #MMMMMMMMMMMMMMM ALIAS MMMMMMMMMMMMMMMMMMMMMMMM
 alias gmt="perl -MHTTP::Date -e 'print \"\n\" . time2str(). \"\n\n\";'"
@@ -35,7 +35,7 @@ alias drush7="~/bin/drush7projet/drush"
 alias cpe="/usr/local/crashplan/bin/CrashPlanEngine"
 #alias cd="pushd"
 #alias ccd="popd"
-alias ack=ack-grep
+# alias ack=ack-grep
 alias ranger='ranger --choosedir=$HOME/.config/ranger/rangerdir;cd $(cat $HOME/.config/ranger/rangerdir)'
 
 

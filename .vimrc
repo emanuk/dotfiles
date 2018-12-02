@@ -85,6 +85,8 @@ syntax enable
 set background=dark
 " set background=light
 " let g:solarized_termcolors=256
+" DIFF: Set high visibility for diff mode
+let g:solarized_diffmode="low"
 colorscheme solarized
 " colorscheme molokai
 " colorscheme badwolf
