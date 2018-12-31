@@ -1,8 +1,9 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_cnt =7
 let g:netrw_dirhist_1='/'
 let g:netrw_dirhist_2='/tmp/Temp-11220a0d-6888-48ed-8f67-215bc8e79957'
 let g:netrw_dirhist_3='/'
 let g:netrw_dirhist_4='/tmp'
 let g:netrw_dirhist_5='/'
 let g:netrw_dirhist_6='/home/emm'
+let g:netrw_dirhist_7='/home/emm/Téléchargements/DEV/vimtests'

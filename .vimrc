@@ -257,6 +257,10 @@ let g:mustache_abbreviations = 1
 " vim-fugitive
 set diffopt+=vertical
 
+" IndentLine
+nnoremap <leader>il :IndentLinesToggle<CR>
+
+
 """"""""""""""
 """ CODING """
 """"""""""""""
