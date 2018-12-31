@@ -19,8 +19,8 @@ echo Done!
 
 # remove dotfiles files in the project dotfiles
 # copy dotfiles in $HOME to the dotfiles directory
-rm -rf $DOTFILES/.bash_aliases $DOTFILES/.screenrc $DOTFILES/.vimrc $DOTFILES/.vim $DOTFILES/.tmux.conf
-cp -r  $HOME/.bash_aliases $HOME/.screenrc $HOME/.vimrc $HOME/.vim  $HOME/.tmux.conf $DOTFILES
+rm -rf $DOTFILES/.bash_aliases $DOTFILES/.screenrc $DOTFILES/.vimrc $DOTFILES/.vim $DOTFILES/.gvimrc $DOTFILES/.tmux.conf
+cp -r  $HOME/.bash_aliases $HOME/.screenrc $HOME/.vimrc $HOME/.vim  $HOME/.tmux.conf $HOME/.gvimrc $DOTFILES
 # don't need here the git projects
 find .vim -name .git -print0|xargs -0 rm -rf
 
