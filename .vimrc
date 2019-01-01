@@ -6,7 +6,7 @@ set bs=2
 set wrapmargin=7
 set wrapscan
 set number
-set relativenumber
+" set relativenumber
 set showmatch
 set term=builtin_ansi
 " ne demande plus de charger le fichier modifié par une autre application
@@ -68,7 +68,9 @@ set gdefault
 set incsearch
 set showmatch
 set hlsearch
+" désélectionne les termes trouvés dans une recherche
 nnoremap <leader><space> :noh<cr>
+nnoremap <Return> :nohls<Return><Return>
 
 " navigation parenthèses
 nnoremap <tab> %
@@ -436,4 +438,10 @@ nnoremap <leader>f :Files<cr>
 "ag the silver searcher
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
+" dans les substitions par defaut le drapeau /g substitue tout
 set nogdefault
+
+" navigation dans les tags
+nnoremap <leader>t :tag <c-r><c-w><cr>
+
+
