@@ -260,6 +260,7 @@ let g:mustache_abbreviations = 1
 set diffopt+=vertical
 
 " IndentLine
+let g:indentLine_enabled = 0
 nnoremap <leader>il :IndentLinesToggle<CR>
 
 
