@@ -4,10 +4,9 @@
 export PAGER="less"
 export LESS="-eirMX"
 # export SHELL="/bin/bash"
-# export ENV="/home/emmanuel/.bashrc"
 # export PS1="[\h]\u:\w \$ "
 # export PS1="\w  % "
-# export EDITOR=vim
+export EDITOR=vim
 # export TERM=xterm-color
 # export COLUMNS=130
 # export LINES=50
