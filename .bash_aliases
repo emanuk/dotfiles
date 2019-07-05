@@ -4,10 +4,9 @@
 export PAGER="less"
 export LESS="-eirMX"
 # export SHELL="/bin/bash"
-# export ENV="/home/emmanuel/.bashrc"
 # export PS1="[\h]\u:\w \$ "
 # export PS1="\w  % "
-# export EDITOR=vim
+export EDITOR=vim
 # export TERM=xterm-color
 # export COLUMNS=130
 # export LINES=50
@@ -15,6 +14,7 @@ export LESS="-eirMX"
 # set bell-style visible
 #setterm -blength 0
 set -o vi
+export PATH="$HOME/bin:$PATH"
 # export PATH="$HOME/bin:$HOME/bin/navicat:$HOME/.config/composer/vendor/bin:$HOME/local/bin:$PATH"
 # export PATH="$HOME/bin:$HOME/bin/navicat:$HOME/.config/composer/vendor/bin:/usr/bin:/usr/sbin:$PATH"
 # export TERM="xterm-256color"
