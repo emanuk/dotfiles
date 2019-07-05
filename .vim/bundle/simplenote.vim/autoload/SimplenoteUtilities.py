@@ -1,5 +1,6 @@
 # Python classes and methods for simplenote.vim
 
+import json
 import os
 import sys
 import vim
@@ -16,17 +17,35 @@ if sys.version_info > (3, 0):
     from queue import Queue
 else:
     from Queue import Queue
+import os.path
 
 DEFAULT_SCRATCH_NAME = vim.eval("g:simplenote_scratch_buffer")
+INDEX_CACHE_FILE = os.path.join(os.path.expanduser("~"),".snvim")
 
 class SimplenoteVimInterface(object):
     """ Interface class to provide functions for interacting with VIM """
 
     def __init__(self, username, password):
         self.simplenote = simplenote.Simplenote(username, password)
+        # Storing keys/ids for the note list
         self.note_index = []
+        # Lightweight "cache" of note data for note index
+        self.note_cache = {}
+        if int(vim.eval("exists('g:vader_file')")) == 0:
+            if os.path.isfile(INDEX_CACHE_FILE):
+                try:
+                    with open(INDEX_CACHE_FILE, 'r') as f:
+                        cache_file = json.load(f)
+                        self.note_cache = cache_file["cache"]
+                        self.simplenote.current = cache_file["current"]
+                except IOError as e:
+                    print("Error: Unable to read index cache to file - %s" % e)
+        # TODO: Maybe possible to merge the following with note_cache now?
         self.note_version = {}
+        # Map bufnums to noteids
         self.bufnum_to_noteid = {}
+        # Default Window width for single window mode - other things override this
+        self.vertical_window_width = 0
 
     def get_current_note(self):
         """ returns the key of the currently edited note """
@@ -154,7 +173,12 @@ class SimplenoteVimInterface(object):
             if vim.eval('s:listsize > 0') == "1":
                 width = int(vim.eval('s:listsize'))
             else:
-                width = width/2
+                # If no existing list index then store, otherwise use stored value
+                if self.vertical_window_width == 0:
+                    width = width/2
+                    self.vertical_window_width = width
+                else:
+                    width = self.vertical_window_width
 
         # get note flags
         if "systemtags" in note:
@@ -247,14 +271,14 @@ class SimplenoteVimInterface(object):
         Returns list of fetched notes
         """
         queue = Queue()
-        note_list = []
+        note_cache = {}
         for key in key_list:
             queue.put(key)
-            t = NoteFetcher(queue, note_list, self.simplenote)
+            t = NoteFetcher(queue, note_cache, self.simplenote)
             t.start()
 
         queue.join()
-        return note_list
+        return note_cache
 
     def scratch_buffer(self, sb_name = DEFAULT_SCRATCH_NAME, sb_number = -1):
         """ Opens a scratch buffer from python
@@ -305,7 +329,10 @@ class SimplenoteVimInterface(object):
             vim.command("au! BufWriteCmd <buffer> call s:UpdateNoteFromCurrentBuffer()")
             vim.command("au! BufFilePre <buffer> call s:PreRenameBuffer()")
             vim.command("let s:renaming = 0")
-            buffer[:] = list(map(lambda x: str(x), note["content"].split("\n")))
+            try:
+                buffer[:] = list(map(lambda x: str(x), note["content"].split("\n")))
+            except UnicodeEncodeError:
+                buffer[:] = list(map(lambda x: unicode(x), note["content"].split("\n")))
             vim.command("setlocal nomodified")
             vim.command("doautocmd BufReadPost")
             # BufReadPost can cause auto-selection of filetype based on file content so set filetype after this
@@ -335,7 +362,6 @@ class SimplenoteVimInterface(object):
             this function is executed before the actual saving """
         vim.command("let s:renaming = 1") # we just need to know if user is renaming this buffer
 
-
     def update_note_from_current_buffer(self):
         """ updates the currently displayed note to the web service or creates new """
 
@@ -363,12 +389,13 @@ class SimplenoteVimInterface(object):
             vim.command("au! BufFilePre <buffer>")
             vim.command("setlocal buftype=")
 
-
-
     def update_note_to_web_service(self):
 
             note_id = self.get_current_note()
-            content = "\n".join(str(line) for line in vim.current.buffer[:])
+            try:
+                content = "\n".join(str(line) for line in vim.current.buffer[:])
+            except UnicodeEncodeError:
+                content = "\n".join(unicode(line) for line in vim.current.buffer[:])
             # Need to get note details first to assess remote markdown status
             note, status = self.simplenote.get_note(note_id)
             if status == 0:
@@ -386,14 +413,18 @@ class SimplenoteVimInterface(object):
                 note, status = self.simplenote.update_note({"content": content,
                                                         "key": note_id,
                                                         "version": self.note_version[note_id],
-                                                        "systemtags": note["systemtags"]})
+                                                        "systemtags": note["systemtags"],
+                                                        "tags" : note["tags"]})
                 if status == 0:
                     print("Update successful.")
                     self.note_version[note_id] = note["version"]
                     # Merging content.
                     if 'content' in note:
                         buffer = vim.current.buffer
-                        buffer[:] = list(map(lambda x: str(x), note["content"].split("\n")))
+                        try:
+                            buffer[:] = list(map(lambda x: str(x), note["content"].split("\n")))
+                        except UnicodeEncodeError:
+                            buffer[:] = list(map(lambda x: unicode(x), note["content"].split("\n")))
                         print("Merged local content for %s" % note_id)
                     vim.command("setlocal nomodified")
                     #Need to (potentially) update buffer title, but we will just update anyway
@@ -476,11 +507,6 @@ class SimplenoteVimInterface(object):
 
         vim.command("set nomodified")
 
-
-
-
-
-
     def set_tags_for_current_note(self):
         """ set tags for the current note"""
         note_id = self.get_current_note()
@@ -497,7 +523,6 @@ class SimplenoteVimInterface(object):
         else:
             print("Error fetching note data.")
 
-
     def trash_current_note(self):
         """ trash the currently displayed note """
         note_id = self.get_current_note()
@@ -511,7 +536,7 @@ class SimplenoteVimInterface(object):
             print("Moving note to trash failed.: %s" % note)
 
     def delete_current_note(self):
-        """ trash the currently displayed note """
+        """ delete the currently displayed note """
         note_id = self.get_current_note()
         note, status = self.simplenote.delete_note(note_id)
         if status == 0:
@@ -519,8 +544,11 @@ class SimplenoteVimInterface(object):
             """ when running tests don't want to manipulate or close buffer """
             if int(vim.eval("exists('g:vader_file')")) == 0:
                 self.remove_note_from_index(note_id, vim.current.buffer.number)
-                # Vim doesn't actually complete remove the buffer, but it does undo mappings, etc so we should forget this buffer.
+                # Vim doesn't actually completely remove the buffer, but it does undo mappings, etc so we should forget this buffer.
                 del self.bufnum_to_noteid[vim.current.buffer.number]
+                # Also need to remove from our cache
+                del self.note_cache[note_id]
+                self.write_index_cache()
                 vim.command("bdelete!")
         else:
             print("Deleting note failed.: %s" % note)
@@ -577,14 +605,20 @@ class SimplenoteVimInterface(object):
                     if version == "0":
                         note, status = self.simplenote.get_note(note_id)
                         if status == 0:
-                            buffer[:] = list(map(lambda x: str(x), note["content"].split("\n")))
+                            try:
+                                buffer[:] = list(map(lambda x: str(x), note["content"].split("\n")))
+                            except UnicodeEncodeError:
+                                buffer[:] = list(map(lambda x: unicode(x), note["content"].split("\n")))
                             # Need to set as unmodified so can continue to browse through versions
                             vim.command("setlocal nomodified")
                             print("Displaying most recent version of note ID %s" % note_id)
                     else:
                         note, status = self.simplenote.get_note(note_id, version)
                         if status == 0:
-                            buffer[:] = list(map(lambda x: str(x), note["content"].split("\n")))
+                            try:
+                                buffer[:] = list(map(lambda x: str(x), note["content"].split("\n")))
+                            except UnicodeEncodeError:
+                                buffer[:] = list(map(lambda x: unicode(x), note["content"].split("\n")))
                             # Need to set as unmodified so can continue to browse through versions
                             vim.command("setlocal nomodified")
                             print("Displaying note ID %s version %s. To restore, :Simplenote -u, to revert to most recent, :Simplenote -v" % (note_id, version))
@@ -597,7 +631,11 @@ class SimplenoteVimInterface(object):
 
     def create_new_note_from_current_buffer(self):
         """ get content of the current buffer and create new note """
-        content = "\n".join(str(line) for line in vim.current.buffer[:])
+        try:
+            content = "\n".join(str(line) for line in vim.current.buffer[:])
+        except UnicodeEncodeError:
+            content = "\n".join(unicode(line) for line in vim.current.buffer[:])
+
         markdown = (vim.eval("&filetype") == "markdown")
         if markdown:
             note, status = self.simplenote.update_note({"content": content,
@@ -637,14 +675,17 @@ class SimplenoteVimInterface(object):
             # Switch back to note buffer so it can be deleted from function calling this one
             #Need reverse look up again
             buffernumber = [b for b, n in self.bufnum_to_noteid.items() if n == note_id ][0]
-            vim.command("buffer "+str(buffernumber))
+            try:
+                vim.command("buffer "+str(buffernumber))
+            except UnicodeEncodeError:
+                vim.command("buffer "+unicode(buffernumber))
             # Also delete from note_index so opening notes works as expected
             del self.note_index[position]
         except ValueError:
             # Handle improbable situation of trying to remove a note that wasn't there
             print("Unable to remove deleted note from list index")
 
-    def list_note_index_in_scratch_buffer(self, since=None, tags=[]):
+    def list_note_index_in_scratch_buffer(self, tags=[]):
         """ get all available notes and display them in a scratchbuffer """
         # Initialize the scratch buffer
         # Check to see if already mapped to a buffer
@@ -659,18 +700,46 @@ class SimplenoteVimInterface(object):
         buffer = vim.current.buffer
         # Need to also keep track of the list index in the bufnum dictionary
         self.bufnum_to_noteid[buffer.number] = DEFAULT_SCRATCH_NAME
-        note_list, status = self.simplenote.get_note_list(since)
+        if self.simplenote.current:
+            note_keys, status = self.simplenote.get_note_list(data=False, since=self.simplenote.current)
+            note_cache = self.get_notes_from_keys([n['key'] for n in note_keys])
+            # Merge with existing
+            self.note_cache.update(note_cache)
+        else:
+            note_keys, status = self.simplenote.get_note_list(data=False)
+            self.note_cache = self.get_notes_from_keys([n['key'] for n in note_keys])
+        # Write out cache
+        self.write_index_cache()
+        note_list = list(self.note_cache.values())
+
         if (len(tags) > 0):
             note_list = [n for n in note_list if (n["deleted"] != 1 and
                             len(set(n["tags"]).intersection(tags)) > 0)]
         else:
             note_list = [n for n in note_list if n["deleted"] != 1]
 
+
         # set global notes index object to notes
         if status == 0:
             note_titles = []
-            notes = self.get_notes_from_keys([n['key'] for n in note_list])
-            notes.sort(key=functools.cmp_to_key(compare_notes))
+            # Iterate through sorts here, need to reverse this because we finish with the primary sort
+            sortorder = list(reversed(vim.eval("s:sortorder").split(",")))
+            sorted_notes = note_list
+            for compare_type in sortorder:
+                compare_type = compare_type.strip()
+                if compare_type == "pinned":
+                    sorted_notes = sorted(sorted_notes, key=lambda n: "pinned" in n["systemtags"], reverse=True)
+                elif compare_type == "modifydate":
+                    sorted_notes = sorted(sorted_notes, key=lambda n: float(n["modifydate"]), reverse=True)
+                elif compare_type == "createdate":
+                    sorted_notes = sorted(sorted_notes, key=lambda n: float(n["createdate"]), reverse=True)
+                elif compare_type == "tags":
+                    # existence of a tag only
+                    sorted_notes = sorted(sorted_notes, key=lambda n: len(n["tags"]) == 0)
+                elif compare_type == "title":
+                    # Ignore case
+                    sorted_notes = sorted(sorted_notes, key=lambda n: str.lower(get_note_title(n)))
+            notes = sorted_notes
             note_titles = [self.format_title(n) for n in notes]
             self.note_index = [n["key"] for n in notes]
             buffer[:] = note_titles
@@ -684,84 +753,20 @@ class SimplenoteVimInterface(object):
         vim.command("nnoremap <buffer><silent> <CR> <Esc>:call <SID>GetNoteToCurrentBuffer()<CR>")
         vim.command("setlocal filetype=simplenote")
 
+    def write_index_cache(self):
+        if int(vim.eval("exists('g:vader_file')")) == 0:
+            try:
+                with open(INDEX_CACHE_FILE, 'w') as f:
+                    json.dump({ "current": self.simplenote.current, "cache": self.note_cache}, f, indent=2)
+            except IOError as e:
+                print("Error: Unable to write index cache to file - %s" % e)
 
 def get_note_title(note):
     """ get title of note """
-    note_lines = note["content"].split("\n")
-    return str(note_lines[0] if len(note_lines) > 0 else note["key"])
-
-
-def compare_notes(note1, note2):
-    """ determine the sort order for two passed in notes
-
-        Parameters:
-          note1 - first note object
-          note2 - second note object
-
-        Returns -1 if the first note is considered smaller, 0 for equal
-        notes and 1 if the first note is considered larger
-    """
-    # setup compare functions
-    def compare_pinned(note1, note2):
-        if ("pinned" in note1["systemtags"] and
-            "pinned" not in note2["systemtags"]):
-            return -1
-        elif ("pinned" in note2["systemtags"] and
-            "pinned" not in note1["systemtags"]):
-            return 1
-        else:
-            return 0
-
-
-    def compare_modified(note1, note2):
-        if float(note1["modifydate"]) < float(note2["modifydate"]):
-            return 1
-        elif float(note1["modifydate"]) > float(note2["modifydate"]):
-            return -1
-        else:
-            return 0
-
-    def compare_created(note1, note2):
-        if float(note1["createdate"]) < float(note2["createdate"]):
-            return 1
-        elif float(note1["createdate"]) > float(note2["createdate"]):
-            return -1
-        else:
-            return 0
-
-    def compare_tags(note1, note2):
-        if note1["tags"] < note2["tags"]:
-            return 1
-        if note1["tags"] > note2["tags"]:
-            return -1
-        else:
-            return 0
-
-    def compare_alpha(note1, note2):
-        title1 = get_note_title(note1)
-        title2 = get_note_title(note2)
-        return (title1 > title2) - (title1 < title2)
-
-    # dict for dynamically calling compare functions
-    sortfuncs = {
-        "pinned": compare_pinned,
-        "createdate": compare_created,
-        "modifydate": compare_modified,
-        "tags": compare_tags,
-        "title": compare_alpha,
-    }
-
-    sortorder = vim.eval("s:sortorder").split(",")
-
-    for key in sortorder:
-        res = sortfuncs.get(key.strip(),lambda x,y: 0)(note1, note2)
-        if res != 0:
-            return res
-
-    # return equal if no comparison hit
-    return 0
-
-
+    try:
+        return str(note["title"])
+    except UnicodeEncodeError:
+        return unicode(note["title"])
 
 
 class NoteFetcher(Thread):
@@ -780,8 +785,21 @@ class NoteFetcher(Thread):
     def run(self):
         key = self.queue.get()
         note, status = self.simplenote.get_note(key)
+        # Strip down and store a lightweight version
+        # Storing key "twice" as makes easier to convert to list later
+        note_lines = note["content"].split("\n")
+        note_title = note_lines[0] if len(note_lines) > 0 else note["key"]
+        notelight = {
+            "key": note["key"],
+            "modifydate": note["modifydate"],
+            "createdate": note["createdate"],
+            "tags": note["tags"],
+            "systemtags": note["systemtags"],
+            "deleted": note["deleted"],
+            "title": note_title
+        }
         if status != -1:
-          self.note_list.append(note)
+            self.note_list[note["key"]] = notelight
 
         self.queue.task_done()
 

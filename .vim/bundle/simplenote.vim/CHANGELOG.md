@@ -1,5 +1,34 @@
 # Changelog
 
+## 2.2.0 (11/05/2018)
+- Save index list to disk for faster start
+- Don't used the disk cache when testing
+- Try to keep list index width when vertical and using default width
+
+## 2.1.0 (11/04/2018)
+- Keep in memory cache of notes to speed up list index updates
+
+## 2.0.3 (10/30/2018)
+- Need to send tags by default with Simperium
+
+## 2.0.2 (10/20/2018)
+- Remove references to since in get_note_list, pull in sn.py 2.0.3
+
+## 2.0.1 (10/17/2018)
+- More unicode fixes as a result of Simperium
+- Pull in simplenote.py v2.0.2
+
+## 2.0.0 (09/30/2018)
+- Quick Simperium fixes
+- Use simplenote.py v2.0.0 - uses the Simperium API
+- Breaking change: No longer supports `since` in SimpleNoteList
+
+## 1.4.5 (03/24/2018)
+- Update simplenote.py so we can move tag sorting there.
+
+## 1.4.4 (03/04/2018)
+- Re-work sorting of notes in list index
+
 ## 1.4.3 (02/28/2018)
 - Update simplenote.py to 1.0.4
 - Merge branch 'issue94'

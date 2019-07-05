@@ -1,6 +1,44 @@
 History
 ========
 
+2.1.0 (2018-11-04)
+------------------
+
+* Adds since paramter back in (as Simperium cursor, not date)
+* 
+
+2.0.3 (2018-10-19)
+------------------
+
+* No end facing change in functionality - just removes a superfluous default modificationDate
+
+2.0.2 (2018-10-03)
+------------------
+
+* Actually remove the since support like I thought I had. I could have
+  re-implemented since in as per tags so it filters after pulling everything
+  else, but since (ha!) I used "since" for a faster note loading there seems
+  little point.
+
+2.0.1 (2018-10-03)
+------------------
+
+* Documentation updatess only
+
+2.0.0 (2018-09-29)
+------------------
+
+* Update to the Simperium API: https://simperium.com/docs/http/
+* Breaking changes:
+  * The since parameter has been removed. Simperium supports the since parameter, but as a cursor, not a date.
+  * The syncnum key no longer exists (this is an upstream change)
+  * Things seem to be UTF-8 by default
+* This should largely be a drop in replacement though: E.g. Simperium uses id instead of key, but simplenote.py handles that for you.
+
+1.0.5 (2018-03-24)
+-------------------
+* Sort tags in get_note and update_note
+
 1.0.4 (2018-02-26)
 -------------------
 * Unescape html entites due to api change

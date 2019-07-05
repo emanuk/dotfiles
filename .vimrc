@@ -324,7 +324,7 @@ syntax on
 "
 " Antidote spellchecking
 "
-nnoremap <leader>a :!Antidote9 -f %<CR>
+nnoremap <leader>a :!Antidote10 -f %<CR>
 
 "
 " Buffer navigation
