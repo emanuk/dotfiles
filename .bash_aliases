@@ -17,6 +17,7 @@ export LESS="-eirMX"
 set -o vi
 # export PATH="$HOME/bin:$HOME/bin/navicat:$HOME/.config/composer/vendor/bin:$HOME/local/bin:$PATH"
 # export PATH="$HOME/bin:$HOME/bin/navicat:$HOME/.config/composer/vendor/bin:/usr/bin:/usr/sbin:$PATH"
+# export PATH="$PATH:/snap/bin"
 # export TERM="xterm-256color"
 #MMMMMMMMMMMMMMM ALIAS MMMMMMMMMMMMMMMMMMMMMMMM
 alias gmt="perl -MHTTP::Date -e 'print \"\n\" . time2str(). \"\n\n\";'"
