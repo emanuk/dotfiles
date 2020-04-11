@@ -1,6 +1,11 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
-let g:netrw_dirhist_1='/home/emm/src/kplatforms/includes/8'
-let g:netrw_dirhist_2='/home/emm/src/kplatforms/includes'
-let g:netrw_dirhist_3='/home/emm/src/kplatforms/includes/7'
-let g:netrw_dirhist_4='/home/emm/src/kplatforms/includes/7/modules'
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/home/emm/bin/restic'
+let g:netrw_dirhist_2='/home/emm/.local/share/applications'
+let g:netrw_dirhist_3='/home/emm/.config/ranger'
+let g:netrw_dirhist_4='/home/emm/bin'
+let g:netrw_dirhist_5='/tmp/withExEditor/25467/tmpFiles/1/169/rt.koumbit.net'
+let g:netrw_dirhist_6='/home/emm/bin'
+let g:netrw_dirhist_7='/home/emm/.config/tilix/sessions'
+let g:netrw_dirhist_8='/tmp/withExEditor/4337/tmpFiles/1/7/webmail.koumbit.net'
+let g:netrw_dirhist_9='/home/emm/Documents/Perso/Carnets'

@@ -1,3 +1,6 @@
+"pathogen
+execute pathogen#infect()
+
 """""""""""""""""""""""
 """ VIM COMPORTEMENT """
 """"""""""""""""""""""""
@@ -47,7 +50,8 @@ set undofile
 
 " marges et autres
 set wrap
-set textwidth=79
+set lbr
+set textwidth=85
 set formatoptions=qrn1
 set colorcolumn=85
 " set colorcolumn=0
@@ -84,12 +88,13 @@ set term=screen-256color
 highlight Pmenu ctermfg=White ctermbg=DarkBlue cterm=None guifg=Cyan guibg=DarkBlue
 
 syntax enable
-set background=dark
-" set background=light
+" set background=dark
+set background=light
 " let g:solarized_termcolors=256
 " DIFF: Set high visibility for diff mode
 let g:solarized_diffmode="low"
 colorscheme solarized
+call togglebg#map("<F5>")
 " colorscheme molokai
 " colorscheme badwolf
 " colorscheme goodwolf
@@ -125,9 +130,6 @@ set backupdir=~/.vimtmp/_backup//,/tmp//
 """""""""""""""
 """ PLUGINS """
 """""""""""""""
-
-"pathogen
-execute pathogen#infect()
 
 
 " syntastic
@@ -188,7 +190,6 @@ let g:lightline = {
 " function! LightLineFilename()
 "   return expand('%:p')
 " endfunction
-
 
 
 ""investigate
@@ -446,4 +447,19 @@ set nogdefault
 " navigation dans les tags
 nnoremap <leader>t :tag <c-r><c-w><cr>
 
+" linebreak
+nnoremap <leader>lb :set linebreak!<cr>
+
+" force markdown syntax
+nnoremap <leader>md :set syntax=markdown<cr>
+
+" change guifont for gvim on small screen
+nnoremap <leader>gf :set guifont=Monospace\ Regular\ 14<cr>
+
+" fmt
+nnoremap <leader>fmt :,!fmt<cr>
+xnoremap <leader>fmt :'<,'>!fmt<cr>
+
+" Change de thème pour Molokai
+nnoremap <leader>M :colo molokai<cr>
 

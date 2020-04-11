@@ -7,7 +7,7 @@ export LESS="-eirMX"
 # export ENV="/home/emmanuel/.bashrc"
 # export PS1="[\h]\u:\w \$ "
 # export PS1="\w  % "
-# export EDITOR=vim
+export EDITOR=vim
 # export TERM=xterm-color
 # export COLUMNS=130
 # export LINES=50
@@ -19,6 +19,10 @@ set -o vi
 # export PATH="$HOME/bin:$HOME/bin/navicat:$HOME/.config/composer/vendor/bin:/usr/bin:/usr/sbin:$PATH"
 # export PATH="$PATH:/snap/bin"
 # export TERM="xterm-256color"
+
+# vim gnu-gpg
+GPG_TTY=`tty`
+export GPG_TTY
 #MMMMMMMMMMMMMMM ALIAS MMMMMMMMMMMMMMMMMMMMMMMM
 alias gmt="perl -MHTTP::Date -e 'print \"\n\" . time2str(). \"\n\n\";'"
 # alias grep='/usr/local/bin/pcregrep'
@@ -38,7 +42,9 @@ alias cpe="/usr/local/crashplan/bin/CrashPlanEngine"
 #alias ccd="popd"
 # alias ack=ack-grep
 alias ranger='ranger --choosedir=$HOME/.config/ranger/rangerdir;cd $(cat $HOME/.config/ranger/rangerdir)'
+alias ifconfig='ip addr show'
 
+alias wim='vim -c "colo pencil"'
 
 PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
 ########## M ##########################

@@ -60,8 +60,10 @@ endif
 
 " Emmanuel 2015-02-22
 "set guifont=Menlo:h14
-set background=dark
-colorscheme molokai
+set background=light
+" set background=dark
+" colorscheme molokai
+colorscheme solarized
 
 
 "grandeur de la fenêtre
