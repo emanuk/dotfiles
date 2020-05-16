@@ -463,3 +463,5 @@ xnoremap <leader>fmt :'<,'>!fmt<cr>
 " Change de thème pour Molokai
 nnoremap <leader>M :colo molokai<cr>
 
+" Copie texte en édition dans le presse-papier
+nnoremap <leader>cc :! cat % \| xclip<cr>
