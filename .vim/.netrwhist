@@ -1,4 +1,2 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
-let g:netrw_dirhist_1='/var/www/opendoor/public_html'
-let g:netrw_dirhist_2='/home/emm/Téléchargements'
+let g:netrw_dirhist_cnt =0

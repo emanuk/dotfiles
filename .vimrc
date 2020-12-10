@@ -453,6 +453,9 @@ nnoremap <leader>lb :set linebreak!<cr>
 " force markdown syntax
 nnoremap <leader>md :set syntax=markdown<cr>
 
+" force markdown syntax
+nnoremap <leader>css :set syntax=css<cr>
+
 " change guifont for gvim on small screen
 nnoremap <leader>gf :set guifont=Monospace\ Regular\ 14<cr>
 
@@ -465,3 +468,9 @@ nnoremap <leader>M :colo molokai<cr>
 
 " Copie texte en édition dans le presse-papier
 nnoremap <leader>cc :! cat % \| xclip<cr>
+
+" cache les caractères invisible 
+nnoremap <leader>nl :set nolist!<cr>
+
+" ouvre les fichiers md sans rétractations des sections
+set foldlevel=99

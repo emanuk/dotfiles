@@ -1,0 +1,4 @@
+:DecodeQP	gpg_qp.txt	/*:DecodeQP*
+gcp	gpg_qp.txt	/*gcp*
+gpg_qp.txt	gpg_qp.txt	/*gpg_qp.txt*
+v_gcp	gpg_qp.txt	/*v_gcp*
