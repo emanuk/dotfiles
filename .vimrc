@@ -88,8 +88,8 @@ set term=screen-256color
 highlight Pmenu ctermfg=White ctermbg=DarkBlue cterm=None guifg=Cyan guibg=DarkBlue
 
 syntax enable
-" set background=dark
-set background=light
+set background=dark
+" set background=light
 " let g:solarized_termcolors=256
 " DIFF: Set high visibility for diff mode
 let g:solarized_diffmode="low"
