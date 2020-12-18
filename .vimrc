@@ -23,7 +23,7 @@ set wrap
 set ic
 set shortmess+=I
 
-" vi no compatbile
+" vi no compatible
 set nocompatible
 
 " tab
