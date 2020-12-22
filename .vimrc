@@ -217,22 +217,22 @@ let g:tagbar_autoclose = 0
 let g:tagbar_autofocus = 1
 
 " simplenote.vim
-if !empty(glob("$HOME/.simplenoterc"))
-  source ~/.simplenoterc
-  let g:SimplenoteVertical=1
+" if !empty(glob("$HOME/.simplenoterc"))
+  " source ~/.simplenoterc
+  " let g:SimplenoteVertical=1
   " g:SimplenoteSingleWindow
   " let g:SimplenoteStrftime="%Y-%m-%d %T"
-  let g:SimplenoteStrftime="%Y-%m-%d"
-  let g:SimplenoteFiletype="markdown"
+  " let g:SimplenoteStrftime="%Y-%m-%d"
+  " let g:SimplenoteFiletype="markdown"
   " let g:SimplenoteListSize=30
   " let g:SimplenoteSortOrder="pinned,title"
-  nnoremap <leader>snl :SimplenoteList<CR>
-  nnoremap <leader>snt :SimplenoteTag<CR>
-  nnoremap <leader>snn :SimplenoteNew<CR>
-  nnoremap <leader>snp :SimplenotePin<CR>
-  nnoremap <leader>snP :SimplenoteUnpin<CR>
+  " nnoremap <leader>snl :SimplenoteList<CR>
+  " nnoremap <leader>snt :SimplenoteTag<CR>
+  " nnoremap <leader>snn :SimplenoteNew<CR>
+  " nnoremap <leader>snp :SimplenotePin<CR>
+  " nnoremap <leader>snP :SimplenoteUnpin<CR>
   " nnoremap <leader>snu :SimplenoteUpdate<CR>
-endif
+" endif
 
 " vim-vinegar (netwr)
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
@@ -263,6 +263,9 @@ set diffopt+=vertical
 " IndentLine
 let g:indentLine_enabled = 0
 nnoremap <leader>il :IndentLinesToggle<CR>
+
+" vim-closetag
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.twig'
 
 
 """"""""""""""
