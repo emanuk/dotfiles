@@ -266,6 +266,7 @@ nnoremap <leader>il :IndentLinesToggle<CR>
 
 " vim-closetag
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.twig'
+let g:closetag_close_shortcut = '<leader>>'
 
 
 """"""""""""""
