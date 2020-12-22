@@ -473,4 +473,9 @@ nnoremap <leader>cc :! cat % \| xclip<cr>
 nnoremap <leader>nl :set nolist!<cr>
 
 " ouvre les fichiers md sans rétractations des sections
-set foldlevel=99
+" set foldlevel=99
+
+" code folding
+set foldmethod=indent
+set nofoldenable
+
