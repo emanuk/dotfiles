@@ -1,37 +1,28 @@
+" vim:fdm=marker
+
 "pathogen
 execute pathogen#infect()
 
-"""""""""""""""""""""""
-""" VIM COMPORTEMENT """
-""""""""""""""""""""""""
+" => Configuration générale {{{
+
+" Options {{{
+
+set nocompatible
+let mapleader = ","
+
 set autoindent
 set bs=2
 set wrapmargin=7
 set wrapscan
 set number
-" set relativenumber
 set showmatch
 set term=builtin_ansi
-" ne demande plus de charger le fichier modifié par une autre application
-set autoread
-"clipboard ajoute automatiquement au presse-papier système
-" clipboard+=unnamed
-
+set autoread "charge automatiquement fichier modifié par autre application
 set syntax
 syntax on
 set wrap
 set ic
-set shortmess+=I
-
-" vi no compatible
-set nocompatible
-
-" tab
-set softtabstop=2
-set expandtab
-set tabstop=2
-set shiftwidth=2
-
+set shortmess+=I "don't give the intro message when starting Vim
 set encoding=utf-8
 set scrolloff=3
 set autoindent
@@ -40,30 +31,40 @@ set showcmd
 set hidden
 set wildmenu
 set wildmode=list:longest
-" set visualbell
 set cursorline
 set ttyfast
 set ruler
 set backspace=indent,eol,start
 set laststatus=2
 set undofile
+au FocusLost * :wa "autosave when focus is lost
+au BufRead,BufNewFile *.md set filetype=markdown "pour reconnaître .md comme extension Markdown
+set title "titre fenêtre
+set guioptions-=T "pas de barre d'outils dans gvim
+set history=200 "history
+" }}}
 
-" marges et autres
+" tab {{{
+set softtabstop=2
+set expandtab
+set tabstop=2
+set shiftwidth=2
+" }}}
+
+" marges et autres {{{
 set wrap
 set lbr
 set textwidth=85
 set formatoptions=qrn1
 set colorcolumn=85
-" set colorcolumn=0
+" }}}
 
-" rendre visible caracteres invisibles
+" rendre visible caracteres invisibles {{{
 set list
 set listchars=tab:▸\ ,eol:¬
+" }}}
 
-" Leader
-let mapleader = ","
-
-" recherche
+" recherche {{{
 nnoremap / /\v
 vnoremap / /\v
 set ignorecase
@@ -72,17 +73,27 @@ set gdefault
 set incsearch
 set showmatch
 set hlsearch
+
 " désélectionne les termes trouvés dans une recherche
 nnoremap <leader><space> :noh<cr>
 nnoremap <Return> :nohls<Return><Return>
+" }}}
 
-" navigation parenthèses
+" navigation parenthèses {{{
 nnoremap <tab> %
 vnoremap <tab> %
+" }}}
 
-set shortmess=I
 
-" theme
+" tmp files swp backup undo {{{
+set undodir=~/.vimtmp/_undo//,/tmp//
+set directory=~/.vimtmp/_swap//,/tmp//
+set backupdir=~/.vimtmp/_backup//,/tmp//
+" }}}
+
+" Configuration générale: fin }}}
+"
+" => Thème {{{
 set t_Co=256
 set term=screen-256color
 highlight Pmenu ctermfg=White ctermbg=DarkBlue cterm=None guifg=Cyan guibg=DarkBlue
@@ -102,35 +113,9 @@ call togglebg#map("<F5>")
 " colorscheme mustang
 " colorscheme vitamins
 " colors zenburn
+" }}}
 
-
-" autosave when focus is lost
-au FocusLost * :wa
-
-" pour reconnaître .md comme extension Markdown
-au BufRead,BufNewFile *.md set filetype=markdown
-
-"titre fenêtre
-set title
-
-" pas de barre d'outils dans gvim
-set guioptions-=T
-
-" history
-set history=200
-
-"grandeur de la fenêtre
-":set lines=70 columns=100
-
-" tmp files swp backup undo
-set undodir=~/.vimtmp/_undo//,/tmp//
-set directory=~/.vimtmp/_swap//,/tmp//
-set backupdir=~/.vimtmp/_backup//,/tmp//
-
-"""""""""""""""
-""" PLUGINS """
-"""""""""""""""
-
+" => Plugins {{{
 
 " syntastic
 set statusline+=%#warningmsg#
@@ -268,10 +253,9 @@ nnoremap <leader>il :IndentLinesToggle<CR>
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.twig'
 nnoremap <leader>ct :CloseTagToggleBuffer<CR>
 
+" }}}
 
-""""""""""""""
-""" CODING """
-""""""""""""""
+" => Programmation {{{
 
 " check perl code with :make
 
@@ -323,9 +307,10 @@ if has("autocmd")
 endif
 syntax on
 
-""""""""""""""""""""""""""""
-""" KEY MAP -  SHORTCUTS """
-""""""""""""""""""""""""""""
+" }}}
+
+" => Raccourcis {{{
+
 "
 " Antidote spellchecking
 "
@@ -445,7 +430,7 @@ nnoremap <leader>f :Files<cr>
 "ag the silver searcher
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
-" dans les substitions par defaut le drapeau /g substitue tout
+" dans les substitutions par defaut le drapeau /g substitue tout
 set nogdefault
 
 " navigation dans les tags
@@ -483,3 +468,4 @@ nnoremap <leader>nl :set nolist!<cr>
 set foldmethod=indent
 set nofoldenable
 
+" }}}
