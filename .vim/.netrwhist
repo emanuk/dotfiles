@@ -1,2 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =0
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/home/emm/src/kplatforms/includes/8'
+let g:netrw_dirhist_2='/home/emm/src/kplatforms/includes/8/modules'
+let g:netrw_dirhist_3='/home/emm/www/opuscule2/app/templates'
