@@ -15,10 +15,9 @@ export EDITOR=vim
 # set bell-style visible
 #setterm -blength 0
 set -o vi
-# export PATH="$HOME/bin:$HOME/bin/navicat:$HOME/.config/composer/vendor/bin:$HOME/local/bin:$PATH"
-# export PATH="$HOME/bin:$HOME/bin/navicat:$HOME/.config/composer/vendor/bin:/usr/bin:/usr/sbin:$PATH"
 # export PATH="$PATH:/snap/bin"
 # export TERM="xterm-256color"
+export PATH="$PATH:~/bin/guake"
 
 # vim gnu-gpg
 GPG_TTY=`tty`

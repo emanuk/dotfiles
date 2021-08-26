@@ -1,5 +1,12 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
-let g:netrw_dirhist_1='/home/emm/src/kplatforms/includes/8'
-let g:netrw_dirhist_2='/home/emm/src/kplatforms/includes/8/modules'
-let g:netrw_dirhist_3='/home/emm/www/opuscule2/app/templates'
+let g:netrw_dirhistcnt =2
+let g:netrw_dirhist_2='/home/emm/bin/guake'
+let g:netrw_dirhist_1='/home/emm'
+let g:netrw_dirhist_0='/home/emm/bin/guake'
+let g:netrw_dirhist_9='/home/emm/www'
+let g:netrw_dirhist_8='/home/emm'
+let g:netrw_dirhist_7='/home/emm/bin'
+let g:netrw_dirhist_6='/home/emm/bin/guake'
+let g:netrw_dirhist_5='/home/emm/bin'
+let g:netrw_dirhist_4='/home/emm/src/kplatforms/includes/7/civicrm'
+let g:netrw_dirhist_3='/home/emm/src/kplatforms/includes/8'

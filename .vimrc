@@ -105,7 +105,7 @@ set background=dark
 " let g:solarized_termcolors=256
 " DIFF: Set high visibility for diff mode
 let g:solarized_diffmode="low"
-colorscheme solarized
+" colorscheme solarized
 call togglebg#map("<F5>")
 " colorscheme molokai
 " colorscheme badwolf
@@ -114,6 +114,8 @@ call togglebg#map("<F5>")
 " colorscheme mustang
 " colorscheme vitamins
 " colors zenburn
+colors gruvbox
+autocmd vimenter * ++nested colorscheme gruvbox
 " }}}
 
 " => Plugins {{{
@@ -447,7 +449,7 @@ nnoremap <leader>md :set syntax=markdown<cr>
 nnoremap <leader>css :set syntax=css<cr>
 
 " change guifont for gvim on small screen
-nnoremap <leader>gf :set guifont=Monospace\ Regular\ 14<cr>
+nnoremap <leader>gf :set guifont=Monospace\ Regular\ 16<cr>
 
 " fmt
 nnoremap <leader>fmt :,!fmt<cr>
