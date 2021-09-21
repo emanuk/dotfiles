@@ -115,6 +115,7 @@ call togglebg#map("<F5>")
 " colorscheme vitamins
 " colors zenburn
 colors gruvbox
+let g:gruvbox_contrast_dark = 'soft'
 autocmd vimenter * ++nested colorscheme gruvbox
 " }}}
 
@@ -142,9 +143,7 @@ nnoremap <leader>syr :SyntasticReset<cr>
 " set grepprg=ack-grep\ -k
 
 "lightline
-" let g:lightline = {
-"       \ 'colorscheme': 'seoul256',
-"       \ }
+
 let g:lightline = {
       \ 'colorscheme': 'seoul256',
       \ 'active': {
@@ -155,30 +154,6 @@ let g:lightline = {
       \   'gitbranch': 'gitbranch#name'
       \ },
       \ }
-
-" let g:lightline = {
-"       \ 'active': {
-"       \   'left': [ [ 'mode', 'paste' ],
-"       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-"       \ },
-"       \ 'component_function': {
-"       \   'gitbranch': 'gitbranch#name'
-"       \ },
-"       \ }
-
-" let g:lightline = {
-"       \ 'colorscheme': 'wombat',
-"       \ }
-
-" let g:lightline = {
-"       \ 'component_function': {
-"       \   'filename': 'LightLineFilename'
-"       \ }
-"       \ }
-" function! LightLineFilename()
-"   return expand('%:p')
-" endfunction
-
 
 ""investigate
 let g:investigate_url_for_php="https://duckduckgo.com/?q=!php ^s"
@@ -294,6 +269,12 @@ autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 
 " EmberJS template .hbs 
 autocmd FileType hbs set omnifunc=htmlcomplete#CompleteTags
+
+" bash
+" bash execute
+nnoremap <leader>b :!bash %<cr>
+
+
 
 " Drupal
 if has("autocmd")

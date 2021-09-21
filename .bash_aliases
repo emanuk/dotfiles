@@ -17,7 +17,7 @@ export EDITOR=vim
 set -o vi
 # export PATH="$PATH:/snap/bin"
 # export TERM="xterm-256color"
-export PATH="$PATH:~/bin/guake"
+# export PATH="$PATH:~/bin/guake"
 
 # vim gnu-gpg
 GPG_TTY=`tty`
