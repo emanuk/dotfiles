@@ -313,7 +313,7 @@ nnoremap gb :ls<CR>:b<Space>
 "
 " Tagbar
 "
-nnoremap <leader>t :TagbarToggle<CR>
+nnoremap <leader>ta :TagbarToggle<CR>
 
 "
 "ContrlP voir h:CONTROLP
