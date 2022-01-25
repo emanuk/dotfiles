@@ -116,7 +116,8 @@ call togglebg#map("<F5>")
 " colors zenburn
 colors gruvbox
 let g:gruvbox_contrast_dark = 'soft'
-autocmd vimenter * ++nested colorscheme gruvbox
+" autocmd vimenter * ++nested colorscheme gruvbox
+autocmd vimenter * nested colorscheme gruvbox
 " }}}
 
 " => Plugins {{{
