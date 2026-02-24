@@ -61,8 +61,8 @@ set colorcolumn=85
 " }}}
 
 " rendre visible caracteres invisibles {{{
-set list
-set listchars=tab:▸\ ,eol:¬
+" set list
+" set listchars=tab:▸\ ,eol:¬
 " }}}
 
 " recherche {{{
@@ -250,6 +250,9 @@ nnoremap <leader>ct :CloseTagToggleBuffer<CR>
 
 " php execute
 nnoremap <leader>r :!php %<cr>
+
+" perl write file and execute
+map <C-p> :w<CR>:!perl %<CR>
 
 " commentary
 autocmd FileType php setlocal commentstring=#\ %s
@@ -452,5 +455,10 @@ nnoremap <leader>nl :set nolist!<cr>
 " code folding
 set foldmethod=indent
 set nofoldenable
+
+" ajoute le buffer au presse papier
+nnoremap <leader>pp :%w !xclip<cr>
+
+
 
 " }}}

@@ -1,32 +1,19 @@
 # .bashrc
 
 ##################### M ##################
+export LC_CTYPE=fr_CA.UTF-8
+export LC_ALL=fr_CA.UTF-8
+
 export PAGER="less"
 export LESS="-eirMX"
-# export SHELL="/bin/bash"
-# export ENV="/home/emmanuel/.bashrc"
-# export PS1="[\h]\u:\w \$ "
-# export PS1="\w  % "
 export EDITOR=vim
-# export TERM=xterm-color
-# export COLUMNS=130
-# export LINES=50
-# export LANG=en_CA.UTF-8
-# set bell-style visible
-#setterm -blength 0
 set -o vi
-# export PATH="$PATH:/snap/bin"
-# export TERM="xterm-256color"
-# export PATH="$PATH:~/bin/guake"
 
 # vim gnu-gpg
 GPG_TTY=`tty`
 export GPG_TTY
 #MMMMMMMMMMMMMMM ALIAS MMMMMMMMMMMMMMMMMMMMMMMM
 alias gmt="perl -MHTTP::Date -e 'print \"\n\" . time2str(). \"\n\n\";'"
-# alias grep='/usr/local/bin/pcregrep'
-#alias grep='/usr/bin/egrep'
-#alias vi='/usr/bin/vim'
 alias jj='jobs'
 alias rm='rm -i'
 alias dr='ls -lF --color'
@@ -36,15 +23,26 @@ alias ll='ls -lFh --color'
 alias lll='ls -alhF --color'
 alias llll='ls -aldhF --color'
 alias drush7="~/bin/drush7projet/drush"
-alias cpe="/usr/local/crashplan/bin/CrashPlanEngine"
-#alias cd="pushd"
-#alias ccd="popd"
-# alias ack=ack-grep
 alias ranger='ranger --choosedir=$HOME/.config/ranger/rangerdir;cd $(cat $HOME/.config/ranger/rangerdir)'
 alias ifconfig='ip addr show'
 
-alias wim='vim -c "colo pencil"'
+# ruby, gem, jekyll
+export GEM_HOME="$HOME/gems"
+export PATH="$HOME/gems/bin:$PATH"
+export PATH=$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH
+alias jek='bundle exec jekyll'
+alias mux='tmuxinator'
 
+
+
+# git
+source $HOME/.git-prompt.sh
+source $HOME/.git-completion.bash
+
+# export GIT_PS1_SHOWDIRTYSTATE=1
+# export PS1='\w$(__git_ps1 " (%s)")\$ '
+
+# PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007$(__git_ps1 "[%s]")"'
 PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
 ########## M ##########################
 function drm {
